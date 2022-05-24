@@ -1,4 +1,4 @@
-package lv.pi.premiums.application.service.pricing.rule;
+package lv.pi.premiums.application.service.pricing;
 
 import lv.pi.premiums.application.domain.PremiumAttribute;
 import lv.pi.premiums.application.service.pricing.exception.PremiumCalculationException;

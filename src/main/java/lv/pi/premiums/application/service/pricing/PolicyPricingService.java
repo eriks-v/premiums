@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import lv.pi.premiums.application.domain.Policy;
 import lv.pi.premiums.application.domain.PremiumAttribute;
 import lv.pi.premiums.application.service.pricing.exception.PremiumCalculationException;
-import lv.pi.premiums.application.service.pricing.rule.PremiumPricingRule;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

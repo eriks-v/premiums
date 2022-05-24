@@ -10,7 +10,6 @@ import lv.pi.premiums.application.domain.Policy;
 import lv.pi.premiums.application.domain.PremiumAttribute;
 import lv.pi.premiums.application.domain.RiskType;
 import lv.pi.premiums.application.service.pricing.exception.PremiumCalculationException;
-import lv.pi.premiums.application.service.pricing.rule.PremiumPricingRule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

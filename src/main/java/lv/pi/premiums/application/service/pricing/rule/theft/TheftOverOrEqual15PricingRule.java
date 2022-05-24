@@ -2,9 +2,10 @@ package lv.pi.premiums.application.service.pricing.rule.theft;
 
 import lombok.extern.slf4j.Slf4j;
 import lv.pi.premiums.application.domain.PremiumAttribute;
-import lv.pi.premiums.application.service.pricing.rule.PremiumPricingRule;
+import lv.pi.premiums.application.service.pricing.PremiumPricingRule;
 import lv.pi.premiums.application.service.pricing.rule.SumInsuredIsGreaterPricingDecision;
 import lv.pi.premiums.application.service.pricing.rule.TheftPricingDecision;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 @Component
 @Order(0)
 @Slf4j
+@Profile("DEFAULT")
 class TheftOverOrEqual15PricingRule implements PremiumPricingRule, TheftPricingDecision, SumInsuredIsGreaterPricingDecision {
 
     private static final BigDecimal UPPER_SUM_INSURED_THRESHOLD = new BigDecimal("15").subtract(new BigDecimal("0.01"));
