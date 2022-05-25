@@ -119,4 +119,5 @@ class PremiumCalculatorIntegrationTest {
 
     assertEquals(expectedMessage, exception.getMessage());
   }
+
 }

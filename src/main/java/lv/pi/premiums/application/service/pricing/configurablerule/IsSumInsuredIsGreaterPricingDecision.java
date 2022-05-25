@@ -3,9 +3,8 @@ package lv.pi.premiums.application.service.pricing.configurablerule;
 import lv.pi.premiums.application.domain.PremiumAttribute;
 
 import java.math.BigDecimal;
-import java.util.function.Predicate;
 
-public class IsSumInsuredIsGreaterPricingDecision implements Predicate<PremiumAttribute> {
+public class IsSumInsuredIsGreaterPricingDecision implements PremiumAttributePredicate {
 
     private final BigDecimal lowerThreshold;
 

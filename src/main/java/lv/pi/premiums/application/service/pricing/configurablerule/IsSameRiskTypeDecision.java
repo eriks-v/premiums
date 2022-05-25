@@ -4,9 +4,7 @@ package lv.pi.premiums.application.service.pricing.configurablerule;
 import lv.pi.premiums.application.domain.PremiumAttribute;
 import lv.pi.premiums.application.domain.RiskType;
 
-import java.util.function.Predicate;
-
-public class IsSameRiskTypeDecision implements Predicate<PremiumAttribute> {
+public class IsSameRiskTypeDecision implements PremiumAttributePredicate {
 
     private final RiskType checkRiskType;
 

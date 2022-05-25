@@ -1,0 +1,5 @@
+Risk type, Sum insured minimum threshold,coefficient
+FIRE,100,0.024
+FIRE,,0.014
+THEFT,14.99,0.05
+THEFT,,0.11
