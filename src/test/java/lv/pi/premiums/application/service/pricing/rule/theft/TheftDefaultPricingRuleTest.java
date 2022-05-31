@@ -1,5 +1,6 @@
 package lv.pi.premiums.application.service.pricing.rule.theft;
 
+import lv.pi.premiums.application.domain.PricingRange;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -12,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TheftDefaultPricingRuleTest {
 
-    private final TheftDefaultPricingRule theftDefaultPricingRule = new TheftDefaultPricingRule();
+    private final TheftDefaultPricingRule theftDefaultPricingRule = new TheftDefaultPricingRule(new BigDecimal("0.11"),
+                                                                                                new PricingRange(null, new BigDecimal("14.99")));
 
     @Test
     void isNotApplicableForNotTheftRiskType() {

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Service
 @AllArgsConstructor
 @Slf4j
-public class PremiumCalculator implements CalculatePremium {
+class PremiumCalculator implements CalculatePremium {
 
     private final Validate<Policy> policyValidationService;
     private final PolicyPricing policyPricingService;

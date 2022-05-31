@@ -1,5 +1,6 @@
 package lv.pi.premiums.application.service.pricing.rule.fire;
 
+import lv.pi.premiums.application.domain.PricingRange;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FireDefaultPricingRuleTest {
 
-    private final FireDefaultPricingRule fireDefaultPricingRule = new FireDefaultPricingRule();
+    private final FireDefaultPricingRule fireDefaultPricingRule = new FireDefaultPricingRule(new BigDecimal("0.014"), new PricingRange(null, BigDecimal.valueOf(100)));
 
     @Test
     void isNotApplicableForNotFireRiskType() {

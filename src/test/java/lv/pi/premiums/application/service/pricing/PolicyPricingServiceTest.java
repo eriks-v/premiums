@@ -34,7 +34,7 @@ class PolicyPricingServiceTest {
     Set<PremiumAttribute> premiumAttributes = Set.of(
         new PremiumAttribute(RiskType.FIRE, BigDecimal.valueOf(1))
     );
-    String expectedMessage = "No rule found.";
+    String expectedMessage = "No matching rule found for pricing attribute: PremiumAttribute(riskType=FIRE, sumInsured=1)";
     //when
     when(premiumAttributeService.collectPremiumAttributes(policy)).thenReturn(premiumAttributes);
     //then
@@ -69,7 +69,7 @@ class PolicyPricingServiceTest {
     Set<PremiumAttribute> premiumAttributes = Set.of(
         new PremiumAttribute(RiskType.FIRE, BigDecimal.valueOf(1))
     );
-    String expectedMessage = "No rule found.";
+    String expectedMessage = "No matching rule found for pricing attribute: PremiumAttribute(riskType=FIRE, sumInsured=1)";
     //when
     when(premiumAttributeService.collectPremiumAttributes(policy)).thenReturn(premiumAttributes);
     //then

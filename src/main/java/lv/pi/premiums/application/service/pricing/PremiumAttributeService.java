@@ -19,14 +19,6 @@ import static java.util.stream.Collectors.*;
 @Slf4j
 class PremiumAttributeService implements PremiumAttributeCollector {
 
-    private Set<PremiumAttribute> mapPremiumSumGroupings(
-            Map<RiskType, BigDecimal> sumInsuredGroupedByRiskTypes) {
-        return sumInsuredGroupedByRiskTypes.entrySet()
-                .stream()
-                .map(grouping -> new PremiumAttribute(grouping.getKey(), grouping.getValue()))
-                .collect(toUnmodifiableSet());
-    }
-
     @Override
     public Set<PremiumAttribute> collectPremiumAttributes(@NonNull Policy policy) {
 
@@ -43,5 +35,13 @@ class PremiumAttributeService implements PremiumAttributeCollector {
 
         return mapPremiumSumGroupings(sumInsuredGroupedByRiskTypes);
 
+    }
+
+    private Set<PremiumAttribute> mapPremiumSumGroupings(
+            Map<RiskType, BigDecimal> sumInsuredGroupedByRiskTypes) {
+        return sumInsuredGroupedByRiskTypes.entrySet()
+                .stream()
+                .map(grouping -> new PremiumAttribute(grouping.getKey(), grouping.getValue()))
+                .collect(toUnmodifiableSet());
     }
 }

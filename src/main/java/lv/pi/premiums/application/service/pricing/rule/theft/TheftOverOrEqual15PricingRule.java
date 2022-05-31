@@ -2,28 +2,35 @@ package lv.pi.premiums.application.service.pricing.rule.theft;
 
 import lombok.extern.slf4j.Slf4j;
 import lv.pi.premiums.application.domain.PremiumAttribute;
+import lv.pi.premiums.application.domain.PricingRange;
 import lv.pi.premiums.application.service.pricing.rule.PremiumPricingRule;
-import lv.pi.premiums.application.service.pricing.rule.SumInsuredIsGreaterPricingDecision;
+import lv.pi.premiums.application.service.pricing.rule.SumInsuredIsInRangePricingDecision;
 import lv.pi.premiums.application.service.pricing.rule.TheftPricingDecision;
-import org.springframework.core.annotation.Order;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Component
-@Order(0)
 @Slf4j
-class TheftOverOrEqual15PricingRule implements PremiumPricingRule, TheftPricingDecision, SumInsuredIsGreaterPricingDecision {
+class TheftOverOrEqual15PricingRule implements PremiumPricingRule, TheftPricingDecision, SumInsuredIsInRangePricingDecision {
 
-    private static final BigDecimal UPPER_SUM_INSURED_THRESHOLD = new BigDecimal("15").subtract(new BigDecimal("0.01"));
-    private static final BigDecimal PREMIUM_COEFFICIENT = new BigDecimal("0.05");
+    private final BigDecimal PREMIUM_COEFFICIENT;
+    private final PricingRange PRICING_RANGE;
+
+    public TheftOverOrEqual15PricingRule(@Value("${lv.pi.financial.pricing.rule.theft-over-or-equal-15.coefficient}") BigDecimal premiumCoefficient,
+                                         @Value("#{new lv.pi.premiums.application.domain.PricingRange(${lv.pi.financial.pricing.rule.theft-over-or-equal-15.start}, ${lv.pi.financial.pricing.rule.theft-over-or-equal-15.end})}") PricingRange pricingRange) {
+        this.PREMIUM_COEFFICIENT = premiumCoefficient;
+        this.PRICING_RANGE = pricingRange;
+        log.debug("Rule created with range: " + this.PRICING_RANGE + " and coefficient: " + this.PREMIUM_COEFFICIENT);
+    }
 
     @Override
     public boolean isRuleApplicable(PremiumAttribute premiumAttribute) {
 
         log.debug("TheftOverOrEqual15PricingRule: " + premiumAttribute);
 
-        return isTheft(premiumAttribute) && sumInsuredIsGreater(premiumAttribute, UPPER_SUM_INSURED_THRESHOLD);
+        return isTheft(premiumAttribute) && sumInsuredIsInRange(premiumAttribute, PRICING_RANGE);
     }
 
     @Override
