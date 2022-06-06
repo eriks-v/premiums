@@ -1,0 +1,32 @@
+lv:
+  pi:
+    financial:
+      rounding-rule: HALF_UP
+logging:
+  level:
+    lv:
+      pi:
+        premiums: DEBUG
+    root: DEBUG
+premium:
+  premiumPricingRules:
+    - riskType: 'FIRE'
+      pricingRange:
+        start: null
+        end: '100'
+      premiumCoefficient: '0.014'
+    - riskType: 'THEFT'
+      pricingRange:
+        start: '15'
+        end: null
+      premiumCoefficient: '0.05'
+    - riskType: 'FIRE'
+      pricingRange:
+        start: '100.01'
+        end: null
+      premiumCoefficient: '0.024'
+    - riskType: 'THEFT'
+      pricingRange:
+        start: null
+        end: '14.99'
+      premiumCoefficient: '0.11'

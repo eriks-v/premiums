@@ -1,14 +1,16 @@
 package lv.pi.premiums.application.domain;
 
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
 import java.math.BigDecimal;
 
 @ToString
+@Getter
 public class PricingRange {
-    BigDecimal start;
-    BigDecimal end;
+    private final BigDecimal start;
+    private final BigDecimal end;
 
     public PricingRange(BigDecimal start, BigDecimal end) {
 

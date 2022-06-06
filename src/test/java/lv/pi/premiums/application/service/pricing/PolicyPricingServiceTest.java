@@ -11,6 +11,7 @@ import lv.pi.premiums.application.domain.PremiumAttribute;
 import lv.pi.premiums.application.domain.RiskType;
 import lv.pi.premiums.application.service.pricing.exception.PremiumCalculationException;
 import lv.pi.premiums.application.service.pricing.rule.PremiumPricingRule;
+import lv.pi.premiums.application.service.pricing.ruleprovider.PricingRuleProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -25,12 +26,14 @@ class PolicyPricingServiceTest {
   @Mock
   Policy policy;
 
+  @Mock
+  PricingRuleProvider pricingRuleProvider;
+
   @Test
   void throwsExceptionWhenNoPricingRuleFound() {
 
     //given
-    List<PremiumPricingRule> premiumPricingRules = List.of();
-    PolicyPricing policyPricingService = new PolicyPricingService(premiumAttributeService, premiumPricingRules);
+    PolicyPricing policyPricingService = new PolicyPricingService(premiumAttributeService, pricingRuleProvider);
     Set<PremiumAttribute> premiumAttributes = Set.of(
         new PremiumAttribute(RiskType.FIRE, BigDecimal.valueOf(1))
     );
@@ -65,7 +68,8 @@ class PolicyPricingServiceTest {
         }
     );
 
-    PolicyPricing policyPricingService = new PolicyPricingService(premiumAttributeService, premiumPricingRules);
+    when(pricingRuleProvider.getPricingRules()).thenReturn(premiumPricingRules);
+    PolicyPricing policyPricingService = new PolicyPricingService(premiumAttributeService, pricingRuleProvider);
     Set<PremiumAttribute> premiumAttributes = Set.of(
         new PremiumAttribute(RiskType.FIRE, BigDecimal.valueOf(1))
     );
@@ -100,7 +104,8 @@ class PolicyPricingServiceTest {
         }
     );
 
-    PolicyPricing policyPricingService = new PolicyPricingService(premiumAttributeService, premiumPricingRules);
+    when(pricingRuleProvider.getPricingRules()).thenReturn(premiumPricingRules);
+    PolicyPricing policyPricingService = new PolicyPricingService(premiumAttributeService, pricingRuleProvider);
     Set<PremiumAttribute> premiumAttributes = Set.of(
         new PremiumAttribute(RiskType.FIRE, BigDecimal.valueOf(5))
     );
@@ -142,8 +147,8 @@ class PolicyPricingServiceTest {
           }
         }
     );
-
-    PolicyPricing policyPricingService = new PolicyPricingService(premiumAttributeService, premiumPricingRules);
+    when(pricingRuleProvider.getPricingRules()).thenReturn(premiumPricingRules);
+    PolicyPricing policyPricingService = new PolicyPricingService(premiumAttributeService, pricingRuleProvider);
     Set<PremiumAttribute> premiumAttributes = Set.of(
         new PremiumAttribute(RiskType.FIRE, BigDecimal.valueOf(5))
     );

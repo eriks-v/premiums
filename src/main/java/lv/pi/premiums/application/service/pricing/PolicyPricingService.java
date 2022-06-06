@@ -1,12 +1,13 @@
 package lv.pi.premiums.application.service.pricing;
 
-import lombok.AllArgsConstructor;
+
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import lv.pi.premiums.application.domain.Policy;
 import lv.pi.premiums.application.domain.PremiumAttribute;
 import lv.pi.premiums.application.service.pricing.exception.PremiumCalculationException;
 import lv.pi.premiums.application.service.pricing.rule.PremiumPricingRule;
+import lv.pi.premiums.application.service.pricing.ruleprovider.PricingRuleProvider;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -16,7 +17,6 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-@AllArgsConstructor
 class PolicyPricingService implements PolicyPricing {
 
     private final PremiumAttributeCollector premiumAttributeService;
@@ -24,6 +24,14 @@ class PolicyPricingService implements PolicyPricing {
 
     private static final int MAX_APPLICABLE_RULE_COUNT = 1;
     private static final int FIRST_VALUE = 0;
+
+    public PolicyPricingService(PremiumAttributeCollector premiumAttributeService,
+        PricingRuleProvider pricingRuleProvider
+    ) {
+        this.premiumAttributeService = premiumAttributeService;
+        this.premiumPricingRules = pricingRuleProvider.getPricingRules();
+        log.debug("premiumPricingRules: " + premiumPricingRules);
+    }
 
     @Override
     public BigDecimal calculatePrice(@NonNull Policy policy) {
@@ -38,6 +46,7 @@ class PolicyPricingService implements PolicyPricing {
     }
 
     private PremiumPricingRule resolveRule(PremiumAttribute premiumAttribute) {
+
         PolicyPricingService.log.debug("Find rule for: " + premiumAttribute);
 
         List<PremiumPricingRule> applicableRules = premiumPricingRules.stream()
