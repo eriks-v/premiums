@@ -1,0 +1,5 @@
+Risk type, Range min, Range max,coefficient
+FIRE,,100,0.014
+FIRE,100.01,,0.024
+THEFT,,14.99,0.11
+THEFT,15,,0.05

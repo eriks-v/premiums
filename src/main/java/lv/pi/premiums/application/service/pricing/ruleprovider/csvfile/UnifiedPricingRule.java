@@ -1,5 +1,6 @@
-package lv.pi.premiums.application.service.pricing.ruleprovider.applicationproperties;
+package lv.pi.premiums.application.service.pricing.ruleprovider.csvfile;
 
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -8,8 +9,6 @@ import lv.pi.premiums.application.domain.PremiumAttribute;
 import lv.pi.premiums.application.domain.PricingRange;
 import lv.pi.premiums.application.domain.RiskType;
 import lv.pi.premiums.application.service.pricing.rule.PremiumPricingRule;
-
-import java.math.BigDecimal;
 
 @ToString
 @EqualsAndHashCode

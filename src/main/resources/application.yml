@@ -1,5 +1,7 @@
 lv:
   pi:
+    rule:
+      configuration-file-location: 'classpath:rule_configuration.csv'
     financial:
       rounding-rule: HALF_UP
 logging:
@@ -30,3 +32,6 @@ premium:
         start: null
         end: '14.99'
       premiumCoefficient: '0.11'
+spring:
+  profiles:
+    active: CSV_RULES
